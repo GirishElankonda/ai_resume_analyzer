@@ -1,0 +1,358 @@
+.results {
+    margin-top: 36px;
+    background-color: white;
+    border-radius: 24px;
+    padding: 28px 30px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+}
+
+.atsSectionTitle {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1a1a2e;
+}
+
+.scoreCards {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.scoreCard {
+    background: linear-gradient(135deg, #fff5f0, #fff0f5);
+    border: 2px solid #fca326;
+    border-radius: 16px;
+    padding: 16px 24px;
+    text-align: center;
+    min-width: 120px;
+}
+
+.scoreCardValue {
+    font-size: 36px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #fca326, #f94a6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.scoreCardLabel {
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+}
+
+.scoreCardMeta {
+    font-size: 14px;
+    color: #444;
+    font-weight: 600;
+}
+
+.atsOverallBanner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #fff5f0, #fff0f5);
+    border: 2px solid #fca326;
+    border-radius: 18px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.atsOverallScore {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.atsOverallNumber {
+    font-size: 52px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #fca326, #f94a6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.atsOverallLabel {
+    font-size: 20px;
+    color: #888;
+    font-weight: 500;
+}
+
+.atsOverallTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.atsOverallSub {
+    font-size: 13px;
+    color: #999;
+    margin-top: 3px;
+}
+
+.atsMetricsBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.atsMetricRow {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.atsMetricHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.atsMetricLabel {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+}
+
+.atsMetricValue {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f94a6b;
+}
+
+.atsProgressBar {
+    width: 100%;
+    height: 10px;
+    background-color: #eee;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.atsProgressFill {
+    height: 100%;
+    border-radius: 30px;
+    transition: width 0.6s ease;
+}
+
+.atsCardBlock {
+    background-color: #f4f6fa;
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+.atsCardTitle {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+}
+
+.atsBadgeGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.atsBadge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: linear-gradient(90deg, #fca326, #f94a6b);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 30px;
+}
+
+.badgeGreen { background: linear-gradient(90deg, #56ab2f, #a8e063); }
+.badgeRed { background: linear-gradient(90deg, #f5576c, #f093fb); }
+.badgeOrange { background: linear-gradient(90deg, #f7971e, #ffd200); color: #333; }
+
+.skillBadge {
+    display: inline-block;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.skillBadge small {
+    color: #888;
+    font-size: 11px;
+}
+
+.atsSuggestionList {
+    margin: 0;
+    padding-left: 20px;
+    list-style: disc;
+}
+
+.atsSuggestionList li {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.7;
+}
+
+.twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.expandSection {
+    margin-bottom: 16px;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.expandHeader {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #fafafa;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a2e;
+}
+
+.expandBody {
+    padding: 16px 20px;
+}
+
+.qualityList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qualityItem {
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: #f9f9f9;
+}
+
+.qualityItem.strength { border-left: 4px solid #56ab2f; }
+.qualityItem.warning { border-left: 4px solid #f7971e; }
+.qualityItem.critical { border-left: 4px solid #f5576c; }
+
+.qualityItem p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.iconStrength { color: #56ab2f; font-weight: bold; font-size: 18px; }
+.iconWarning { color: #f7971e; font-size: 18px; }
+.iconCritical { color: #f5576c; font-weight: bold; font-size: 18px; }
+
+.sectionCard {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+}
+
+.sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.sectionScore {
+    color: #f94a6b;
+}
+
+.sectionDetail {
+    font-size: 13px;
+    color: #555;
+    margin-top: 6px;
+}
+
+.roleCard {
+    background: #f9f9f9;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+}
+
+.roleHeader {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.rolePercent {
+    color: #f94a6b;
+}
+
+.coverLetterBox {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    padding: 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-bottom: 12px;
+}
+
+.actionBtn {
+    padding: 12px 24px;
+    background: linear-gradient(90deg, #fca326, #f94a6b);
+    color: white;
+    border: 2px solid black;
+    border-radius: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.actionBtn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.questionItem {
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eee;
+}
+
+.questionItem p {
+    margin: 0 0 6px;
+    font-size: 14px;
+}
+
+.emptyText {
+    color: #999;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 780px) {
+    .twoCol {
+        grid-template-columns: 1fr;
+    }
+    .results {
+        padding: 20px 16px;
+    }
+}
