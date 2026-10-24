@@ -16,12 +16,18 @@ const History = () => {
 
     const fetchUserData = async () => {
       setLoader(true)
-      {/* Please watch the video for ful source code */ }
-
+      try {
+        const response = await axios.get(`/resume/get/${userInfo?._id}`);
+        setData(response.data.data || []);
+      } catch (error) {
+        alert(error.response?.data?.message || "Unable to load resume history.");
+      } finally {
+        setLoader(false);
+      }
     }
 
-    fetchUserData()
-  }, [])
+    if (userInfo?._id) fetchUserData()
+  }, [userInfo])
 
   return (
     <div className={styles.History}>

@@ -15,9 +15,11 @@ const Login = () => {
     const navigate = useNavigate();
     const handleLogin = async () => {
         try {
-            {/* Please watch the video for ful source code */ }
-
-
+            const result = await signInWithPopup(auth, provider);
+            const { displayName: name, email, photoURL: photoUrl } = result.user;
+            const response = await axios.post("/user", { name, email, photoUrl });
+            setUserInfo(response.data.user);
+            localStorage.setItem("userInfo", JSON.stringify(response.data.user));
 
             setLogin(true);
             localStorage.setItem("isLogin", true)

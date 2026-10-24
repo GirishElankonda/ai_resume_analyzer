@@ -1,11 +1,9 @@
 const ResumeModel = require('../Models/resume');
-const multer = require("multer");
 const pdfParse = require("pdf-parse");
-const path = require("path");
 const { CohereClient } = require("cohere-ai");
 
 const cohere = new CohereClient({
-    token: "Add Your Own Client ID", // 🔑 Paste your API key here
+    token: process.env.COHERE_API_KEY,
 });
 
 
@@ -14,10 +12,20 @@ const cohere = new CohereClient({
 exports.addResume = async (req, res) => {
     try {
         const { job_desc, user } = req.body;
-        console.log(req.file)
-        const pdfBuffer = req.file.buffer || null;
-        {/* Please watch the video for ful source code */ }
+        if (!req.file) {
+            return res.status(400).json({ error: "Please upload a PDF resume." });
+        }
+        if (!job_desc || !job_desc.trim()) {
+            return res.status(400).json({ error: "Please provide a job description." });
+        }
+        if (!user) {
+            return res.status(400).json({ error: "A logged-in user is required." });
+        }
+        if (!process.env.COHERE_API_KEY) {
+            return res.status(503).json({ error: "AI service is not configured on the server." });
+        }
 
+        const pdfData = await pdfParse(req.file.buffer);
         const prompt = `
             You are a resume screening assistant.
             Compare the following resume text with the provided Job Description (JD) and give a match score (0-100) and feedback.
@@ -41,15 +49,22 @@ exports.addResume = async (req, res) => {
             temperature: 0.7,
         });
 
-        let result = response.generations[0].text;
-        // console.log(result)
+        const result = response.generations?.[0]?.text?.trim();
+        if (!result) {
+            throw new Error("The AI service returned an empty analysis.");
+        }
+        const scoreMatch = result.match(/score\s*:\s*(\d{1,3})/i);
+        const score = scoreMatch ? String(Math.min(100, Number(scoreMatch[1]))) : "";
+        const feedback = result.replace(/score\s*:\s*\d{1,3}\s*/i, "").replace(/^reason\s*:\s*/i, "").trim();
 
-        {/* Please watch the video for ful source code */ }
-
+        const newResume = new ResumeModel({
+            user,
+            resume_name: req.file.originalname,
+            job_desc: job_desc.trim(),
+            score,
+            feedback,
+        });
         await newResume.save();
-
-        fs.unlinkSync(pdfPath); // remove temp file
-
         res.status(200).json({ message: "Your analysis are ready", data: newResume });
 
 
@@ -64,8 +79,8 @@ exports.addResume = async (req, res) => {
 
 exports.getAllResumesForUser = async (req, res) => {
     try {
-        {/* Please watch the video for ful source code */ }
-
+        const resumes = await ResumeModel.find({ user: req.params.user }).sort({ createdAt: -1 });
+        return res.status(200).json({ data: resumes });
 
     } catch (err) {
         console.error(err);
@@ -75,8 +90,8 @@ exports.getAllResumesForUser = async (req, res) => {
 
 exports.getResumeForAdmin = async (req, res) => {
     try {
-        {/* Please watch the video for ful source code */ }
-
+        const resumes = await ResumeModel.find().populate("user", "name email").sort({ createdAt: -1 });
+        return res.status(200).json({ data: resumes });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ error: 'Server error', message: err.message });

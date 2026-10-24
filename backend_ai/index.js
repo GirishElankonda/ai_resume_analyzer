@@ -9,7 +9,7 @@ require('./conn');
 app.use(express.json());
 app.use(cors({
     credentials:true,
-    origin:"http://localhost:5173"
+    origin: process.env.FRONTEND_URL || "http://localhost:5173"
 }))
 
 const UserRoutes = require('./Routes/user');
@@ -17,6 +17,8 @@ const ResumeRoutes = require('./Routes/resume');
 
 app.use('/api/user',UserRoutes)
 app.use('/api/resume',ResumeRoutes)
+
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 
 // // Serve static files from the build folder

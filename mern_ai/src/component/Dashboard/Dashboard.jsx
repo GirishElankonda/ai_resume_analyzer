@@ -1,6 +1,5 @@
 
 import styles from './Dashboard.module.css'
-import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import Skeleton from '@mui/material/Skeleton';
 import WithAuthHOC from '../../utils/HOC/withAuthHOC';
 import { useState } from 'react';
@@ -19,37 +18,58 @@ const Dashboard = () => {
     const { userInfo } = useContext(AuthContext);
 
     const handleOnChangeFile = (e) => {
-        setResumeFile(e.target.files[0]);
-        setUploadFileText(e.target.files[0].name)
+        const file = e.target.files[0];
+        if (file) {
+            setResumeFile(file);
+            setUploadFileText(file.name);
+        }
     }
 
     const handleUpload = async () => {
-                            {/* Please watch the video for ful source code */}
-
-
-
+        if (!resumeFile || !jobDesc.trim()) {
+            alert("Please select a PDF resume and enter the job description.");
+            return;
+        }
+        setLoading(true);
+        try {
+            const formData = new FormData();
+            formData.append("resume", resumeFile);
+            formData.append("job_desc", jobDesc.trim());
+            formData.append("user", userInfo?._id);
+            const response = await axios.post("/resume/addResume", formData);
+            setResult(response.data.data);
+        } catch (error) {
+            alert(error.response?.data?.error || error.response?.data?.message || "Analysis failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
         <div className={styles.Dashboard}>
             <div className={styles.DashboardLeft}>
                 <div className={styles.DashboardHeader}>
-                                        {/* Please watch the video for ful source code */}
-
+                    <div className={styles.DashboardHeaderTitle}>Smart Resume Screening</div>
+                    <div className={styles.DashboardHeaderLargeTitle}>Resume Match Score</div>
                 </div>
 
                 <div className={styles.alertInfo}>
-                                        {/* Please watch the video for ful source code */}
-
+                    <div>🔔 Important Instructions:</div>
+                    <div className={styles.dashboardInstruction}>📄 Please paste the complete job description before submitting.</div>
+                    <div className={styles.dashboardInstruction}>📎 Only PDF format resumes are accepted.</div>
                 </div>
 
                 <div className={styles.DashboardUploadResume}>
-                    {/* Please watch the video for ful source code */}
+                    <div className={styles.DashboardResumeBlock}>{uploadFiletext}</div>
+                    <label className={styles.analyzeAIBtn}>
+                        Upload Resume
+                        <input type="file" accept="application/pdf" onChange={handleOnChangeFile} />
+                    </label>
                 </div>
 
                 <div className={styles.jobDesc}>
                     <textarea value={jobDesc} onChange={(e) => { setJobDesc(e.target.value) }} className={styles.textArea} placeholder='Paste Your Job Description' rows={10} cols={50} />
-                    <div className={styles.AnalyzeBtn} onClick={handleUpload} >Analyze</div>
+                    <div className={styles.AnalyzeBtn} onClick={handleUpload}>{loading ? "..." : "Analyze"}</div>
                 </div>
             </div>
 
@@ -67,7 +87,8 @@ const Dashboard = () => {
                     result && <div className={styles.DashboardRightTopCard}>
                         <div>Result</div>
 
-                    {/* Please watch the video for ful source code */}
+                    <div className={styles.cardPercentage}>{result.score}%</div>
+                    <p>{result.feedback}</p>
                         
                     </div>
                 }
