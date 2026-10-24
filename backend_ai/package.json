@@ -4,19 +4,23 @@
   "description": "Backend for AI MERN Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --testPathPattern=tests/",
     "start": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cohere-ai": "^7.18.1",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
+    "cohere-ai": "^8.0.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "express-fileupload": "^1.5.2",
-    "mongoose": "^8.17.1",
-    "multer": "^2.0.2",
-    "nodemon": "^3.1.10",
-    "pdf-parse": "^1.1.1"
+    "mongoose": "^8.24.4",
+    "multer": "^2.2.0",
+    "nodemon": "^3.1.14",
+    "pdf-parse": "^1.1.4"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }

@@ -8,6 +8,7 @@ import Dashboard from './component/Dashboard/Dashboard'
 import History from './component/History/History'
 import Admin from './component/Admin/Admin'
 import Login from './component/Login/Login'
+import AnalysisDetail from './component/AnalysisDetail/AnalysisDetail'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
         <Route path='/' element={<Login />}/>
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/history' element={<History />} />
+        <Route path='/analysis/:id' element={<AnalysisDetail />} />
         <Route path='/admin' element={<Admin />} />
 
       </Routes>

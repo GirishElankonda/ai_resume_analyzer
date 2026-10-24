@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './SideBar.module.css';
-import ArticleIcon from '@mui/icons-material/Article';
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
@@ -17,16 +17,15 @@ const SideBar = () => {
     const { isLogin, setLogin, userInfo, setUserInfo } = useContext(AuthContext);
 
     const handleLogout = () => {
-        localStorage.removeItem('isLogin');
-        localStorage.removeItem('userInfo');
+        localStorage.clear();
         setLogin(false);
         setUserInfo(null);
-        navigate('/');
+        navigate("/");
     }
     return (
         <div className={styles.sideBar}>
             <div className={styles.sideBarIcon}>
-                <ArticleIcon sx={{ fontSize: 54, marginBottom: 2 }} />
+                <DocumentScannerIcon sx={{ fontSize: 54, marginBottom: 2 }} />
                 <div className={styles.sideBarTopContent}>Resume Screening</div>
             </div>
 
@@ -37,14 +36,19 @@ const SideBar = () => {
                     <div>Dashboard</div>
                 </Link>
 
+
                 <Link to={'/history'} className={[styles.sideBarOption, location.pathname === '/history' ? styles.selectedOption : null].join(' ')}>
                     <ManageSearchIcon sx={{ fontSize: 22 }} />
                     <div>History</div>
                 </Link>
-                {userInfo?.role === "admin" && <Link to={'/admin'} className={styles.sideBarOption}>
+
+                {
+                    userInfo?.role==='admin' && <Link to={'/admin'} className={[styles.sideBarOption, location.pathname === '/admin' ? styles.selectedOption : null].join(' ')}>
                         <AdminPanelSettingsIcon sx={{ fontSize: 22 }} />
                         <div>Admin</div>
-                    </Link>}
+                    </Link>
+                }
+
                 <div onClick={handleLogout} className={styles.sideBarOption}>
                     <LogoutIcon sx={{ fontSize: 22 }} />
                     <div>LogOut</div>

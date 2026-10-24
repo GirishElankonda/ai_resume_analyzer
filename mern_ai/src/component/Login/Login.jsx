@@ -16,14 +16,22 @@ const Login = () => {
     const handleLogin = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            const { displayName: name, email, photoURL: photoUrl } = result.user;
-            const response = await axios.post("/user", { name, email, photoUrl });
-            setUserInfo(response.data.user);
-            localStorage.setItem("userInfo", JSON.stringify(response.data.user));
+            const user = result.user;
+            const userData = {
+                name: user.displayName,
+                email: user.email,
+                photoUrl: user.photoURL
+            }
+
+            await axios.post('/api/user',userData).then((response)=>{
+                setUserInfo(response.data.user);
+                localStorage.setItem("userInfo",JSON.stringify(response.data.user));
+            }).catch((err) => {
+                console.log(err);
+            });
 
             setLogin(true);
             localStorage.setItem("isLogin", true)
-
             navigate('/dashboard')
         } catch (err) {
             alert("Something Went Wrong");
